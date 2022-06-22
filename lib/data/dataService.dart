@@ -9,13 +9,14 @@ import 'package:videotheque_app/data/tmdbFilmStruct.dart';
 
 Future<List<TmdbFilm>> fetchServerInfo() async {
   final response = await http.get(
-      Uri.http("10.0.2.2:8080", "/v1/film/list"),
+      Uri.https("videotheque.azurewebsites.net", '/v1/film/list'),
   );
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     final responseJson = json.decode(utf8.decode(response.bodyBytes));
+
 
     return (responseJson as List).map((p) => TmdbFilm.fromJson(p)).toList();
   } else {
@@ -29,7 +30,7 @@ Future<List<TmdbFilm>> fetchServerInfo() async {
 Future<String> post(Map<String, String?> parameter) async {
   final jsonString = json.encode(parameter);
   final response = await http.post(
-    Uri.http("10.0.2.2:8080",'/v1/film/add', parameter)
+    Uri.https("videotheque.azurewebsites.net",'/v1/film/add', parameter)
   );
 
   if (response.statusCode == 200) {
@@ -49,13 +50,13 @@ Future<String> post(Map<String, String?> parameter) async {
 
 Future<void> update(Map<String, String> parameter) async {
   final response = await http.post(
-    Uri.http("10.0.2.2:8080",'/v1/film/update', parameter)
+    Uri.https("videotheque.azurewebsites.net",'/v1/film/update', parameter)
   );
 }
 
 Future<void> delete(Map<String, String> parameter) async {
   final response = await http.delete(
-      Uri.http("10.0.2.2:8080",'/v1/film/delete', parameter)
+      Uri.https("videotheque.azurewebsites.net",'/v1/film/delete', parameter)
   );
 }
 
@@ -80,7 +81,7 @@ Future<bool> filmExist(String filmName) async {
     'title': filmName
   };
   final response = await http.get(
-      Uri.http("10.0.2.2:8080",'/v1/film/title', param)
+      Uri.https("videotheque.azurewebsites.net",'/v1/film/title', param)
   );
 
   final jsonResponse = json.decode(response.body);

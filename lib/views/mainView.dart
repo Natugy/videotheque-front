@@ -1,5 +1,5 @@
-import 'dart:async';
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:videotheque_app/assets/appDrawer.dart';
 import 'package:videotheque_app/assets/expandedFab.dart';
@@ -21,14 +21,10 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreenState extends State<FirstScreen> {
   late Future<List<TmdbFilm>> filmList;
 
-  final key = GlobalKey();
   bool navButton=false;
   FutureOr onGoBack(dynamic value) {
     setState(() {
       filmList =fetchServerInfo();
-      navButton =false;
-      Navigator.pushNamed(context, "/");
-
 
     });
   }
@@ -42,7 +38,6 @@ class _FirstScreenState extends State<FirstScreen> {
   void initState() {
     super.initState();
     filmList = fetchServerInfo();
-    navButton =false;
 
 
   }
@@ -60,8 +55,6 @@ class _FirstScreenState extends State<FirstScreen> {
         ),
         drawer: const AppDrawer(),
       floatingActionButton: ExpandableFab(
-        key: key,
-
 
           distance: 100,
           initialOpen: navButton,
@@ -75,7 +68,7 @@ class _FirstScreenState extends State<FirstScreen> {
             ),
             ActionButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/search").then(onGoBack);
+                Navigator.pushNamed(context, "/search",).then(onGoBack);
               },
               icon: const Icon(Icons.search, color: Colors.white,),
             ),
