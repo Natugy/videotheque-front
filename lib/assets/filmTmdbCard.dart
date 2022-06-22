@@ -31,7 +31,7 @@ class _TmdbFilmCardState extends State<TmdbFilmCard> {
       return title;
     }
     else {
-      return "${title.substring(0,33)}...";
+      return "${title.substring(0,30)}...";
     }
   }
 

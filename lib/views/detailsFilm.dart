@@ -17,16 +17,16 @@ class _DetailFilmState extends State<DetailFilm> {
 
   
 
-  Future<void> addFilm(TmdbFilm film, bool inBDD) async {
+  void addFilm(TmdbFilm film, bool inBDD) {
 
-    setState((){
+    setState(()   {
       if(inBDD){
         final param = {
           "title": film.title
         };
         delete(param);
-        inBDD = false;
-        film.added=false;
+
+
         Navigator.pushNamed(context, "/");
       }
       else{
@@ -39,8 +39,8 @@ class _DetailFilmState extends State<DetailFilm> {
           "posterPath": film.posterPath
         };
         post(parameters);
-        inBDD =true;
-        film.added =null;
+
+        Navigator.pop(context);
       }
 
 
@@ -126,7 +126,6 @@ class _DetailFilmState extends State<DetailFilm> {
         },
     );
 
-    Color color = Theme.of(context).primaryColor;
 
 
     Widget description =  Padding(
